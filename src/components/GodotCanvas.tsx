@@ -1,4 +1,4 @@
-import { Engine } from "./engine";
+import { Engine } from "../engine";
 import {
   Box,
   Button,
@@ -9,15 +9,16 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
-import godotSplash from "./assets/images/untitled game.png";
+import godotSplash from "../assets/images/godot_splash.png";
+import { basePath } from "../routes.ts";
 
 export function GodotCanvas() {
   const godotConfig = {
     canvasResizePolicy: 0,
-    executable: "untitled game",
+    executable: `${basePath}/untitled game`,
     fileSizes: {
-      "untitled game.pck": 18111248,
-      "untitled game.wasm": 18926504,
+      [`${basePath}/untitled game.pck`]: 18111248,
+      [`${basePath}/untitled game.wasm`]: 18926504,
     },
     onProgress: (current: number, total: number) => {
       setProgress(Math.floor((current / total) * 100));
@@ -42,7 +43,6 @@ export function GodotCanvas() {
   }
 
   useEffect(() => {
-    if (!wrapper.current) return;
     const observer = new ResizeObserver(reloadSize);
     observer.observe(wrapper.current);
     return () => observer.disconnect();
@@ -50,6 +50,12 @@ export function GodotCanvas() {
 
   useEffect(() => {
     engine.startGame().then(() => setShowOverlay(false));
+    return () => {
+      console.warn("clean up engine when unmounting...");
+      console.warn("there will be errors, but they don't break anything idk");
+      engine.requestQuit();
+      engine.unload();
+    };
   }, []);
 
   return (
@@ -94,13 +100,13 @@ export function GodotCanvas() {
           <Text fontSize="20px">{progress} %</Text>
           <Progress
             borderRadius="10px"
-            bgColor="whiteAlpha.800"
+            bgColor="whiteAlpha.900"
             width="300px"
             colorScheme="blue"
             height="20px"
             value={progress}
           />
-          <Text fontSize="20px">downloading game...</Text>
+          <Text fontSize="20px">downloading game . . .</Text>
         </VStack>
       </Center>
     </Box>
