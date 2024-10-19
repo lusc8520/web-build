@@ -1,6 +1,15 @@
 import { Engine } from "./engine";
-import { Box, Center, Progress, Stack, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Image,
+  Progress,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
+import godotSplash from "./assets/images/untitled game.png";
 
 export function GodotCanvas() {
   const godotConfig = {
@@ -11,7 +20,6 @@ export function GodotCanvas() {
       "untitled game.wasm": 18926504,
     },
     onProgress: (current: number, total: number) => {
-      console.log("current", current, "total", total);
       setProgress(Math.floor((current / total) * 100));
     },
     onExit: (code: number) => {
@@ -23,6 +31,9 @@ export function GodotCanvas() {
   const [progress, setProgress] = useState(0);
   const [engine] = useState<any>(new Engine(godotConfig));
   const wrapper = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [width, setWidth] = useState(100);
+  const [height, setHeight] = useState(100);
 
   function reloadSize() {
     if (wrapper.current) {
@@ -37,13 +48,18 @@ export function GodotCanvas() {
     engine.startGame().then(() => setShowOverlay(false));
   }, []);
 
-  const [width, setWidth] = useState(100);
-  const [height, setHeight] = useState(100);
-
   return (
     <Box position="relative" flexGrow={1} ref={wrapper}>
-      {/*<Button onClick={() => engine.requestQuit()}>hi</Button>*/}
+      <Button
+        zIndex={5}
+        onClick={() =>
+          canvasRef.current?.requestFullscreen({ navigationUI: "hide" })
+        }
+      >
+        hi
+      </Button>
       <canvas
+        ref={canvasRef}
         style={{
           display: "block",
           outline: "none",
@@ -69,16 +85,25 @@ export function GodotCanvas() {
         left={0}
       >
         <VStack>
+          <Box width="400px">
+            <Image
+              width="100%"
+              objectFit="contain"
+              align="center"
+              src={godotSplash}
+            />
+          </Box>
           <Text fontSize="20px">{progress} %</Text>
           <Progress
             borderRadius="10px"
             bgColor="transparent"
             width="300px"
-            colorScheme="green"
+            colorScheme="blue"
             height="20px"
-            border="1px lightgreen solid"
+            border="1px lightblue solid"
             value={progress}
           />
+          <Text fontSize="18px">downloading game...</Text>
         </VStack>
       </Center>
     </Box>
