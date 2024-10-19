@@ -43,6 +43,7 @@ export function GodotCanvas() {
   }
 
   useEffect(() => {
+    if (!wrapper.current) return;
     const observer = new ResizeObserver(reloadSize);
     observer.observe(wrapper.current);
     return () => observer.disconnect();
