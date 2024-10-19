@@ -1,5 +1,5 @@
 import { Engine } from "./engine";
-import { Box } from "@chakra-ui/react";
+import { Box, Center, Progress, Stack, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 
 export function GodotCanvas() {
@@ -12,12 +12,15 @@ export function GodotCanvas() {
     },
     onProgress: (current: number, total: number) => {
       console.log("current", current, "total", total);
+      setProgress(Math.floor((current / total) * 100));
     },
     onExit: (code: number) => {
       console.warn("exit", code);
     },
   };
 
+  const [showOverlay, setShowOverlay] = useState(true);
+  const [progress, setProgress] = useState(0);
   const [engine] = useState<any>(new Engine(godotConfig));
   const wrapper = useRef<HTMLDivElement>(null);
 
@@ -31,7 +34,7 @@ export function GodotCanvas() {
   useEffect(() => {
     window.onresize = reloadSize;
     reloadSize();
-    engine.startGame();
+    engine.startGame().then(() => setShowOverlay(false));
   }, []);
 
   const [width, setWidth] = useState(100);
@@ -56,6 +59,28 @@ export function GodotCanvas() {
         <br />
         Please try updating or use a different browser.
       </canvas>
+      <Center
+        display={showOverlay ? "flex" : "none"}
+        height="100%"
+        width="100%"
+        bgColor="#0c0d14"
+        position="absolute"
+        top={0}
+        left={0}
+      >
+        <VStack>
+          <Text fontSize="20px">{progress} %</Text>
+          <Progress
+            borderRadius="10px"
+            bgColor="transparent"
+            width="300px"
+            colorScheme="green"
+            height="20px"
+            border="1px lightgreen solid"
+            value={progress}
+          />
+        </VStack>
+      </Center>
     </Box>
   );
 }
