@@ -31,7 +31,6 @@ export function GodotCanvas() {
   const [progress, setProgress] = useState(0);
   const [engine] = useState<any>(new Engine(godotConfig));
   const wrapper = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [width, setWidth] = useState(100);
   const [height, setHeight] = useState(100);
 
@@ -43,23 +42,22 @@ export function GodotCanvas() {
   }
 
   useEffect(() => {
-    window.onresize = reloadSize;
-    reloadSize();
+    if (!wrapper.current) return;
+    const observer = new ResizeObserver(reloadSize);
+    observer.observe(wrapper.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     engine.startGame().then(() => setShowOverlay(false));
   }, []);
 
   return (
     <Box position="relative" flexGrow={1} ref={wrapper}>
-      <Button
-        zIndex={5}
-        onClick={() =>
-          canvasRef.current?.requestFullscreen({ navigationUI: "hide" })
-        }
-      >
+      <Button zIndex={5} onClick={() => wrapper.current?.requestFullscreen()}>
         hi
       </Button>
       <canvas
-        ref={canvasRef}
         style={{
           display: "block",
           outline: "none",
@@ -85,7 +83,7 @@ export function GodotCanvas() {
         left={0}
       >
         <VStack>
-          <Box width="400px">
+          <Box width="500px">
             <Image
               width="100%"
               objectFit="contain"
@@ -96,14 +94,13 @@ export function GodotCanvas() {
           <Text fontSize="20px">{progress} %</Text>
           <Progress
             borderRadius="10px"
-            bgColor="transparent"
+            bgColor="whiteAlpha.800"
             width="300px"
             colorScheme="blue"
             height="20px"
-            border="1px lightblue solid"
             value={progress}
           />
-          <Text fontSize="18px">downloading game...</Text>
+          <Text fontSize="20px">downloading game...</Text>
         </VStack>
       </Center>
     </Box>
