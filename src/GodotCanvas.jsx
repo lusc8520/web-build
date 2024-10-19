@@ -7,8 +7,8 @@ export function GodotCanvas() {
     canvasResizePolicy: 0,
     executable: "untitled game",
     fileSizes: {
-      "untitled game.pck": 18536352,
-      "untitled game.wasm": 26248785,
+      "untitled game.pck": 18111248,
+      "untitled game.wasm": 18926504,
     },
     onProgress: (number, number2) => {
       console.log(number, number2);
