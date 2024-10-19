@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://lusc8520.github.io/web-build/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
