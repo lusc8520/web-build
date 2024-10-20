@@ -6,6 +6,7 @@ const baseRoute = defineRoute(basePath);
 
 export const { RouteProvider, useRoute, routes } = createRouter({
   home: baseRoute.extend("/home"),
+  cars: baseRoute.extend("/cars"),
   game: baseRoute.extend(
     {
       game: param.path.string,

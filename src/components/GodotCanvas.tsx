@@ -113,7 +113,7 @@ export function GodotCanvas() {
       </Box>
       <Flex justify="center">
         <Button
-          _hover={{ bgColor: "#6842ff90" }}
+          _hover={{ bgColor: "mainLight" }}
           borderRadius="1em"
           fontSize="25px"
           color="white"

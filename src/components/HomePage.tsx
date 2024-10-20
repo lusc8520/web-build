@@ -6,7 +6,7 @@ export function HomePage() {
   return (
     <VStack flexGrow={1} justify="center">
       <Button
-        onClick={() => routes.game({ game: "test" }).push()}
+        onClick={() => routes.game({ game: "empty-scene" }).push()}
         fontSize="25px"
         borderRadius="2em"
         bgColor="#6842ff"
