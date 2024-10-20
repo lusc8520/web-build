@@ -1,11 +1,22 @@
-import { Button, Text, VStack } from "@chakra-ui/react";
+import { Button, Flex, VStack } from "@chakra-ui/react";
 import { routes } from "../routes.ts";
+import { PlayIcon } from "./icons/icons.tsx";
 
 export function HomePage() {
   return (
-    <VStack>
-      <Text fontSize="25px">Home Page</Text>
-      <Button onClick={() => routes.game({ game: "test" }).push()}>Hi</Button>
+    <VStack flexGrow={1} justify="center">
+      <Button
+        onClick={() => routes.game({ game: "test" }).push()}
+        fontSize="25px"
+        borderRadius="2em"
+        bgColor="#6842ff"
+        _hover={{ bgColor: "#7452fa", transform: "scale(1.5)" }}
+      >
+        <Flex color="white" align="center" gap="8px">
+          Play Now
+          <PlayIcon />
+        </Flex>
+      </Button>
     </VStack>
   );
 }

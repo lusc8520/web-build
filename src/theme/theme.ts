@@ -8,5 +8,10 @@ export const theme = extendTheme({
         fontFamily: "Sniglet",
       },
     },
+    Button: {
+      baseStyle: {
+        fontFamily: "Sniglet",
+      },
+    },
   },
 });
