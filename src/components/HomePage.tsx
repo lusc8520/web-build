@@ -14,7 +14,7 @@ export function HomePage() {
       >
         <Flex color="white" align="center" gap="8px">
           Play Now
-          <PlayIcon />
+          <PlayIcon width="30px" height="30px" />
         </Flex>
       </Button>
     </VStack>

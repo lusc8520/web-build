@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/engine.js","./src/main.tsx","./src/routes.ts","./src/vite-env.d.ts","./src/components/godotcanvas.tsx","./src/components/homepage.tsx","./src/components/icons/icons.tsx","./src/hooks/timer.ts","./src/theme/theme.ts"],"version":"5.6.3"}
+{"root":["./src/app.tsx","./src/engine.js","./src/main.tsx","./src/routes.ts","./src/vite-env.d.ts","./src/components/godotcanvas.tsx","./src/components/homepage.tsx","./src/components/car/carpage.tsx","./src/components/icons/icons.tsx","./src/hooks/timer.ts","./src/theme/theme.ts"],"version":"5.6.3"}
