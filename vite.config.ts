@@ -5,4 +5,9 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   base: "/web-build/",
   plugins: [react()],
+  server: {
+    headers: {
+      "X-Frame-Options": "SAMEORIGIN",
+    },
+  },
 });

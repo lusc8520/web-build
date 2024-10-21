@@ -9,8 +9,8 @@ export function HomePage() {
         onClick={() => routes.game({ game: "empty-scene" }).push()}
         fontSize="25px"
         borderRadius="2em"
-        bgColor="#6842ff"
-        _hover={{ bgColor: "#7452fa", transform: "scale(1.5)" }}
+        bgColor="main"
+        _hover={{ bgColor: "mainLight", transform: "scale(1.5)" }}
       >
         <Flex color="white" align="center" gap="8px">
           Play Now

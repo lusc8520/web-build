@@ -1,4 +1,4 @@
-import { Engine } from "../engine";
+import { Engine } from "./engine";
 import {
   Box,
   Button,
@@ -11,9 +11,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
-import godotSplash from "../assets/images/godot_splash.png";
-import { basePath } from "../routes.ts";
-import { FullIcon } from "./icons/icons.tsx";
+import godotSplash from "../../assets/images/godot_splash.png";
+import { basePath } from "../../routes.ts";
+import { FullIcon } from "../icons/icons.tsx";
+
+const engine: any = new Engine();
 
 export function GodotCanvas() {
   const godotConfig = {
@@ -30,7 +32,6 @@ export function GodotCanvas() {
 
   const [showOverlay, setShowOverlay] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [engine] = useState<any>(new Engine(godotConfig));
   const wrapper = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -50,7 +51,10 @@ export function GodotCanvas() {
   }, []);
 
   useEffect(() => {
-    engine.startGame().then(() => setShowOverlay(false));
+    engine
+      .startGame(godotConfig)
+      .then(() => setShowOverlay(false))
+      .catch((e: Error) => console.error("canvas error", e.message));
     return () => {
       console.warn("clean up engine when unmounting...");
       console.warn("there will be errors, but they don't break anything idk");
@@ -74,9 +78,11 @@ export function GodotCanvas() {
           width={width}
           height={height}
         >
-          HTML5 canvas appears to be unsupported in the current browser.
-          <br />
-          Please try updating or use a different browser.
+          <Text>
+            HTML5 canvas appears to be unsupported in the current browser.
+            <br />
+            Please try updating or use a different browser.
+          </Text>
         </canvas>
         {showOverlay && (
           <Center
@@ -117,7 +123,7 @@ export function GodotCanvas() {
           borderRadius="1em"
           fontSize="25px"
           color="white"
-          bgColor="#6842ff"
+          bgColor="main"
           onClick={() => wrapper.current?.requestFullscreen()}
         >
           <Flex align="center" gap="8px">

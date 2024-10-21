@@ -1,5 +1,5 @@
 import { Button, Flex, HStack, Image, Stack } from "@chakra-ui/react";
-import { GodotCanvas } from "./components/GodotCanvas.tsx";
+import { GodotCanvas } from "./components/godot/GodotCanvas.tsx";
 import "./assets/css/main.css";
 import { routes, useRoute } from "./routes.ts";
 import { HomePage } from "./components/HomePage.tsx";
@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { HomeIcon } from "./components/icons/icons.tsx";
 import { CarPage } from "./components/car/CarPage.tsx";
 import car from "./assets/images/car.png";
+import { FlutterPage } from "./components/flutter/FlutterPage.tsx";
 
 export function App() {
   const route = useRoute();
@@ -15,17 +16,17 @@ export function App() {
     <Stack
       gap={0}
       overflow="hidden"
-      bgColor="#0c0d14"
+      bgColor="background"
       width="100vw"
       height="100vh"
     >
-      <HStack gap="15px" padding="10px" bgColor="#232433">
+      <HStack gap="15px" padding="10px" bgColor="backgroundLight">
         <Button
           height="50px"
           _hover={{ bgColor: "mainLight", color: "white" }}
           borderRadius="2em"
           color={route.name === "home" ? "white" : "whiteAlpha.700"}
-          bgColor={route.name === "home" ? "#6842ff" : "transparent"}
+          bgColor={route.name === "home" ? "main" : "transparent"}
           variant="ghost"
           onClick={() => routes.home().push()}
         >
@@ -39,7 +40,7 @@ export function App() {
           _hover={{ bgColor: "mainLight", color: "white" }}
           borderRadius="2em"
           color={route.name === "cars" ? "white" : "whiteAlpha.700"}
-          bgColor={route.name === "cars" ? "#6842ff" : "transparent"}
+          bgColor={route.name === "cars" ? "main" : "transparent"}
           variant="ghost"
           onClick={() => routes.cars().push()}
         >
@@ -48,11 +49,25 @@ export function App() {
             Cars
           </Flex>
         </Button>
+        <Button
+          height="50px"
+          _hover={{ bgColor: "mainLight", color: "white" }}
+          borderRadius="2em"
+          color={route.name === "flutter" ? "white" : "whiteAlpha.700"}
+          bgColor={route.name === "flutter" ? "main" : "transparent"}
+          variant="ghost"
+          onClick={() => routes.flutter().push()}
+        >
+          <Flex fontSize="35px" align="center" gap="5px">
+            Flutter
+          </Flex>
+        </Button>
       </HStack>
       <>
         {route.name === "home" && <HomePage />}
         {route.name === "game" && <GodotCanvas />}
         {route.name === "cars" && <CarPage />}
+        {route.name === "flutter" && <FlutterPage />}
         {route.name === false && <FallbackPage />}
       </>
     </Stack>
