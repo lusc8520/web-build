@@ -8,6 +8,7 @@ import { HomeIcon } from "./components/icons/icons.tsx";
 import { CarPage } from "./components/car/CarPage.tsx";
 import car from "./assets/images/car.png";
 import { FlutterPage } from "./components/flutter/FlutterPage.tsx";
+import { CarProvider } from "./components/car/CarContext.tsx";
 
 export function App() {
   const route = useRoute();
@@ -66,7 +67,11 @@ export function App() {
       <>
         {route.name === "home" && <HomePage />}
         {route.name === "game" && <GodotCanvas />}
-        {route.name === "cars" && <CarPage />}
+        {route.name === "cars" && (
+          <CarProvider>
+            <CarPage />
+          </CarProvider>
+        )}
         {route.name === "flutter" && <FlutterPage />}
         {route.name === false && <FallbackPage />}
       </>

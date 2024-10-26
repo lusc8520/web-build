@@ -1,1 +1,1 @@
-export type Result<E, V> = { ok: true; value: V } | { ok: false; value: E };
+export type Result<T, E> = { ok: true; value: T } | { ok: false; value: E };
