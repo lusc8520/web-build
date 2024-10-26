@@ -1,11 +1,11 @@
-import { CarProvider, useCars } from "./CarContext.tsx";
+import { useCars } from "./CarContext.tsx";
 import { Button, Center, Flex, Image, Stack, Text } from "@chakra-ui/react";
 import { useRandomCar } from "./randomCar.ts";
 import { useEffect, useState } from "react";
 import { CarPicture } from "./car.ts";
 
 export function CarPage() {
-  const { result, fetchCar, setResult } = useRandomCar();
+  const { result, fetchCar } = useRandomCar();
   const { saveCar } = useCars();
 
   const [car, setCar] = useState<CarPicture | undefined>(undefined);
