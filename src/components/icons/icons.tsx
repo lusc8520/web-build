@@ -32,3 +32,25 @@ export function PlayIcon({ ...props }: IconProps) {
     </Icon>
   );
 }
+
+export function ReloadIcon({ ...props }: IconProps) {
+  return (
+    <Icon viewBox="0 -960 960 960" {...props}>
+      <path
+        fill="currentColor"
+        d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"
+      />
+    </Icon>
+  );
+}
+
+export function SaveIcon({ ...props }: IconProps) {
+  return (
+    <Icon viewBox="0 -960 960 960" {...props}>
+      <path
+        fill="currentColor"
+        d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h447q16 0 30.5 6t25.5 17l114 114q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T760-120H200Zm560-526L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM280-560h280q17 0 28.5-11.5T600-600v-80q0-17-11.5-28.5T560-720H280q-17 0-28.5 11.5T240-680v80q0 17 11.5 28.5T280-560Zm-80-86v446-560 114Z"
+      />
+    </Icon>
+  );
+}
