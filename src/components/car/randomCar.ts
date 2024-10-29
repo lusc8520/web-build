@@ -17,7 +17,7 @@ export function useRandomCar(): ReturnType {
   async function fetchCar() {
     setFetchState("fetching");
     // simulate 200ms min fetch time
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    //await new Promise((resolve) => setTimeout(resolve, 1000));
     fetch(carUrl)
       .then((response) => response.json())
       .then((carList) =>

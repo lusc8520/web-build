@@ -15,8 +15,6 @@ import godotSplash from "../../assets/images/godot_splash.png";
 import { basePath } from "../../routes.ts";
 import { FullIcon } from "../icons/icons.tsx";
 
-const engine: any = new Engine();
-
 export function GodotCanvas() {
   const godotConfig = {
     canvasResizePolicy: 0,
@@ -30,6 +28,7 @@ export function GodotCanvas() {
     },
   };
 
+  const [engine] = useState<any>(new Engine());
   const [showOverlay, setShowOverlay] = useState(true);
   const [progress, setProgress] = useState(0);
   const wrapper = useRef<HTMLDivElement>(null);
@@ -51,6 +50,7 @@ export function GodotCanvas() {
   }, []);
 
   useEffect(() => {
+    console.warn("engine", engine);
     engine
       .startGame(godotConfig)
       .then(() => setShowOverlay(false))
